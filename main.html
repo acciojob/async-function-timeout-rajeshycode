@@ -1,20 +1,38 @@
 <!DOCTYPE html>
-
 <html>
-  <head>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-
-  <body>
-    <!-- the entire body must be written by student -->
-    <form onsubmit="return false">
-      <input type="text" id="text" placeholder="Text" />
-      <input type="number" id="delay" placeholder="Delay" />
-      <button type="button" id="btn">Submit</button>
-    </form>
-
+<head>
+    <title>Async Message Display</title>
+</head>
+<body>
+    <input type="text" id="text" placeholder="Enter your message">
+    <input type="number" id="delay" placeholder="Enter delay in seconds">
+    <button id="btn">Display Message</button>
     <div id="output"></div>
 
-    <script type="text/javascript" src="./script.js"></script>
-  </body>
+    <script>
+        async function delayAndDisplayMessage() {
+            const textInput = document.getElementById('text');
+            const delayInput = document.getElementById('delay');
+            const outputDiv = document.getElementById('output');
+
+            const message = textInput.value;
+            const delayInSeconds = parseFloat(delayInput.value) * 1000; // Convert to milliseconds
+
+            if (!message || isNaN(delayInSeconds)) {
+                outputDiv.innerText = 'Please enter a valid message and delay.';
+                return;
+            }
+
+            outputDiv.innerText = 'Waiting...';
+
+            // Use setTimeout to introduce a delay
+            await new Promise(resolve => setTimeout(resolve, delayInSeconds));
+
+            outputDiv.innerText = message;
+        }
+
+        const btn = document.getElementById('btn');
+        btn.addEventListener('click', delayAndDisplayMessage);
+    </script>
+</body>
 </html>

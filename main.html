@@ -16,7 +16,7 @@
             const outputDiv = document.getElementById('output');
 
             const message = textInput.value;
-            const delayInSeconds = parseFloat(delayInput.value) * 1000; // Convert to milliseconds
+            const delayInSeconds = parseInt(delayInput.value, 10) * 1000; // Convert to milliseconds
 
             if (!message || isNaN(delayInSeconds)) {
                 outputDiv.innerText = 'Please enter a valid message and delay.';
